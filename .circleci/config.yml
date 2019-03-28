@@ -1,9 +1,11 @@
-version: 2
+
+defaults: &defaults
+  working_directory: ~/png
+  docker:
+    - image: circleci/node:11.4.0
 jobs:
   build:
-    docker:
-      - image: circleci/node:8
-    working_directory: ~/png
+    <<: *defaults
     steps:
       # Checkout the code from the branch into the working_directory
       - checkout
@@ -32,3 +34,7 @@ jobs:
           command: npm run lint
       # run tests!
       - run: yarn test
+      - store_artifacts:
+          path: coverage
+      # - run: coverage
+      - run: yarn run coverage

@@ -1,5 +1,10 @@
 # Phone Number Genrator
 
+[![CircleCI](https://circleci.com/gh/emp-daisy/PNG/tree/develop.svg?style=svg)](https://circleci.com/gh/emp-daisy/PNG/tree/develop)
+[![Coverage Status](https://coveralls.io/repos/github/emp-daisy/PNG/badge.svg?branch=develop)](https://coveralls.io/github/emp-daisy/PNG?branch=develop)
+
+[API Documentation](https://empress-png.herokuapp.com//documentation)
+
 ## Installation Guide
 
 ### Testing

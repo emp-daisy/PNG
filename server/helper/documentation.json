@@ -1,0 +1,91 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "PNG",
+    "description": "This API is for a phone number generator which saves to file and retrieves when needed",
+    "contact": {
+      "name": "Jessica"
+    }
+  },
+  "basePath": "/",
+  "schemes": ["https", "http"],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/phonenumber": {
+      "get": {
+        "description": "Get all the generated number",
+        "summary": "/phonenumber",
+        "tags": [
+          "Phone Number"
+        ],
+        "operationId": "PhonenumberGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "description": "Sort by ascending or descending order",
+            "enum": [ "asc", "desc"],
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/phonenumber/generate": {
+      "get": {
+        "description": "Generate new set of numbers",
+        "summary": "/phonenumber/generate",
+        "tags": [
+          "Phone Number"
+        ],
+        "operationId": "PhonenumberGenerateGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "description": "Sort by ascending or descending order",
+            "enum": [ "asc", "desc"],
+            "type": "string"
+          }, {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Number of items to generate",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Phone Number",
+      "description": ""
+    }
+  ]
+}
