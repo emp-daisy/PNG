@@ -6,21 +6,23 @@
   "author": "Jessica",
   "license": "MIT",
   "engines": {
-    "node": "11.4.0",
     "npm": "6.4.1"
   },
   "scripts": {
     "start:dev": "nodemon server",
     "start": "node server",
-    "test": "jest",
+    "test": "jest --detectOpenHandles",
+    "coverage": "cat coverage/lcov.info | coveralls",
     "lint": "eslint . --ext .js --fix"
   },
   "dependencies": {
     "eslint": "^5.15.3",
     "express": "^4.16.4",
-    "global": "^4.3.2"
+    "global": "^4.3.2",
+    "swagger-ui-express": "^4.0.2"
   },
   "devDependencies": {
+    "coveralls": "^3.0.3",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.16.0",
     "jest": "^24.5.0",
@@ -30,8 +32,16 @@
   "jest": {
     "verbose": true,
     "collectCoverage": true,
-    "coverageReporters": ["json", "html", "lcov", "text"],
-    "coveragePathIgnorePatterns": ["/node_modules/", "/coverage/"],
+    "coverageReporters": [
+      "json",
+      "html",
+      "lcov",
+      "text"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/coverage/"
+    ],
     "collectCoverageFrom": [
       "**/*.js",
       "!server/index.js",
