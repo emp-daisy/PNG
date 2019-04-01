@@ -1,0 +1,54 @@
+<div class="generator" (window:resize)="onResize($event)">
+  <div class="title">Phone Number Generator 1.0</div>
+  <div class="playground">
+
+    <div class="formContainer">
+      <div class="generator-options">
+        <div>
+          <span class="sub-title">Generate Phone Numbers here!</span>
+        </div>
+        <div class="input-group">
+          <label>How many numbers required?</label>
+          <input id="min" min="1" max="50" type="number" (change)='setLimit($event.target.value)' value={{limit}} />
+        </div>
+        <div class="input-group">
+          <label>Sort by</label>
+          <select value={{sort}} (change)='setSort($event.target.value)'>
+            <option value="asc">Ascending</option>
+            <option value="desc">Descending</option>
+          </select>
+        </div>
+        <div>
+          <button class="generate" (click)="generate()" [disabled]="invalidLimit || loading">Generate</button>
+        </div>
+      </div>
+      <div class="retrieve-options">
+        <div>
+          <span class="sub-title">List Generated Phone Numbers here!</span>
+        </div>
+        <div>
+          <button class="retrieve" (click)="retrieve()" [disabled]="loading">List all</button>
+        </div>
+      </div>
+    </div>
+    <div class="resultContainer">
+      <div class="record-option">
+        <div class="record-item"><span>Maximum</span>{{max}}</div>
+        <div class="record-item"><span>Minimum</span>{{min}}</div>
+        <div class="record-item"><span>Total</span>{{size}}</div>
+      </div>
+      <div class="result-block">
+        <div>
+          <span class="sub-title">Result!</span>
+        </div>
+        <ul>
+          <li *ngFor="let phone of phonenumbers">
+            {{phone}}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<router-outlet></router-outlet>

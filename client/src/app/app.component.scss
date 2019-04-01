@@ -1,0 +1,231 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700');
+
+$generator-bg: white;
+$padding: 1em;
+$title: #ffffff;
+$accent-primary: #b73a3a;
+$accent-secondary: #a82d2d;
+$text: #212121;
+
+.generator {
+  font-family: Roboto;
+  background: $generator-bg;
+  animation: fadeIn 1s ease-in-out;
+  backface-visibility: hidden;
+  transition: all 0.5s;
+
+  .title {
+    color: $title;
+    font-size: 1.3em;
+    font-weight: bold;
+    padding: $padding;
+    background: $accent-secondary;
+  }
+
+  .sub-title {
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+
+  .playground {
+    width: 100%;
+    display: inline-flex;
+    height: 100vh;
+
+    .formContainer {
+      width: 50%;
+      border-right: 2px solid #9e7070;
+      padding: 2em;
+
+      .generator-options {
+        // width: 50%;
+        padding-bottom: 20px;
+        border-bottom: 2px dotted #9e7070;
+        color: $text;
+
+        .input-group {
+          text-align: center;
+        }
+
+        input,
+        select {
+          border: 0;
+          font-size: 1.1em;
+          width: 150px;
+          border-bottom: 3px solid $accent-secondary;
+          margin: 0 20px;
+          margin-bottom: 1em;
+          background: #f0f0f0;
+          padding: 0.4em;
+          border-radius: 0;
+          -webkit-appearance: none;
+          transition: margin 0.2s;
+        }
+
+        .generate {
+          -webkit-appearance: none;
+          width: 200px;
+          padding: $padding 0;
+          margin: auto;
+          color: $title;
+          font-size: 1.2em;
+          margin: 0;
+          display: block;
+          background: $accent-primary;
+          cursor: pointer;
+          transition: background 0.3s;
+          margin: auto;
+
+          &:disabled {
+            background: #cccccc;
+          }
+
+          &:hover:enabled {
+            background: $accent-secondary;
+          }
+        }
+      }
+
+      .retrieve-options {
+        color: $text;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        border-bottom: 2px dotted #9e7070;
+
+        .retrieve {
+          -webkit-appearance: none;
+          width: 200px;
+          padding: $padding 0;
+          margin: auto;
+          color: $title;
+          font-size: 1.2em;
+          margin: 0;
+          display: block;
+          background: $accent-primary;
+          cursor: pointer;
+          transition: background 0.3s;
+          margin: auto;
+
+          &:disabled {
+            background: #cccccc;
+          }
+
+          &:hover:enabled {
+            background: $accent-secondary;
+          }
+        }
+      }
+
+    }
+
+    .resultContainer {
+      width: 50%;
+      padding: 2em;
+      overflow-y: auto;
+
+      .record-option {
+        display: inline-flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+
+        .record-item {
+          color: $text;
+          width: 150px;
+          height: 50px;
+          padding: 5px;
+          margin: 5px;
+          text-align: center;
+          border: 3px solid $accent-primary;
+
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+
+          span {
+            display: block;
+            font-weight: 800;
+            font-size: 1em;
+          }
+        }
+      }
+
+      .result-block {
+        color: $text;
+
+        ul {
+          text-align: center;
+          margin-bottom: 50px;
+
+          li {
+            display: inline-block;
+            margin: 10px;
+            border-bottom: 2px solid;
+            font-size: 1.1em;
+          }
+        }
+      }
+    }
+  }
+
+
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+
+  .generator {
+    .playground {
+      display: block;
+      height: auto;
+
+      .formContainer {
+        width: 100%;
+        padding: 0;
+
+        .generator-options {
+          width: 100%;
+          margin: 20px 0;
+
+          .input-group {
+            label {
+              display: block;
+            }
+          }
+
+          .generate {
+            -webkit-appearance: none;
+            width: 100%;
+          }
+        }
+
+        .retrieve-options {
+          width: 100%;
+          margin: 20px 0;
+
+          .retrieve {
+            width: 100%;
+          }
+        }
+      }
+
+      .resultContainer {
+        width: 100%;
+        padding: 0;
+
+        .record-options {
+          display: block;
+        }
+      }
+    }
+  }
+}

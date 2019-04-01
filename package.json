@@ -9,11 +9,13 @@
     "npm": "6.4.1"
   },
   "scripts": {
-    "start:dev": "nodemon server",
+    "start:dev": "nodemon server & yarn build:client:dev",
+    "build:client:dev": "cd client && yarn && yarn run build:watch",
     "start": "node server",
     "test": "jest --detectOpenHandles",
     "coverage": "cat coverage/lcov.info | coveralls",
-    "lint": "eslint . --ext .js --fix"
+    "lint": "eslint . --ext .js --fix",
+    "heroku-postbuild": "cd client && yarn install && yarn run build"
   },
   "dependencies": {
     "eslint": "^5.15.3",
