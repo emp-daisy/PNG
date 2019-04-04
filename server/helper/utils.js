@@ -18,7 +18,7 @@ const sortNumbers = (phoneList, ascendingSort) => phoneList.sort((a, b) => {
 const generateNumber = (limit) => {
   const phoneList = new Set();
   while (phoneList.size < limit) {
-    const randomNumber = `0${Math.floor(Math.random() * 9000000000) + 1000000000}`;
+    const randomNumber = `0${Math.floor(Math.random() * 900000000) + 100000000}`;
     phoneList.add(randomNumber);
   }
   return [...phoneList];
@@ -34,6 +34,7 @@ const saveToFile = (phonenumber) => {
   const existingPhonenumbers = readFromFile(phonebook[process.env.NODE_ENV]);
   const arrayList = [...new Set([...existingPhonenumbers, ...phonenumber])];
   const file = fs.createWriteStream(phonebook[process.env.NODE_ENV]);
+  /* istanbul ignore next */
   file.on('error', (error) => { throw (error); });
   arrayList.forEach((v) => { file.write(`${v}\n`); });
   file.end();

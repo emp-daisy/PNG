@@ -1,7 +1,7 @@
 export class Phonenumber {
-  phonenumbers: number[];
+  phonenumbers: string[];
   message: string;
   size: number;
-  min: number;
-  max: number;
+  min: string;
+  max: string;
 }

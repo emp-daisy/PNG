@@ -1,6 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { PhonenumberService } from './../services/phonenumber.service';
-import { Phonenumber } from './../../../phonenumber.model';
+import { Phonenumber } from '../models/phonenumber.model';
 
 @Component({
   selector: 'app-root',
@@ -10,10 +10,10 @@ import { Phonenumber } from './../../../phonenumber.model';
 export class AppComponent implements AfterViewInit {
   limit = 1;
   sort = 'asc';
-  max = 0;
-  min = 0;
+  max: string;
+  min: string;
   phonenumbers = [];
-  size = 0;
+  size: number;
   invalidLimit = false;
   loading = false;
 
@@ -28,6 +28,7 @@ export class AppComponent implements AfterViewInit {
   onResize() {
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+
     if (window.innerWidth > 600) {
       document.body.style.overflow = 'hidden';
     } else {
@@ -36,7 +37,7 @@ export class AppComponent implements AfterViewInit {
   }
 
   setLimit(value: any) {
-    this.limit = value;
+    this.limit = +value;
     if (value > 50 || value < 1 || Number.isNaN(value)) {
       this.invalidLimit = true;
     } else {
@@ -50,24 +51,28 @@ export class AppComponent implements AfterViewInit {
 
   generate() {
     this.loading = true;
-    this.phonenumberService.generateNumber(this.limit, this.sort).subscribe((data: Phonenumber) => {
-      const { size, min, max, phonenumbers } = data;
-      this.max = min || 0;
-      this.min = max || 0;
-      this.phonenumbers = phonenumbers;
-      this.size = size;
-      this.loading = false;
-    });
+    this.phonenumberService
+      .generateNumber(this.limit, this.sort)
+      .subscribe((data: Phonenumber) => {
+        const { size, min, max, phonenumbers } = data;
+        this.min = min;
+        this.max = max;
+        this.phonenumbers = phonenumbers;
+        this.size = size;
+        this.loading = false;
+      });
   }
   retrieve() {
     this.loading = true;
-    this.phonenumberService.getAllNumbers(this.sort).subscribe((data: Phonenumber) => {
-      const { size, min, max, phonenumbers } = data;
-      this.max = min || 0;
-      this.min = max || 0;
-      this.phonenumbers = phonenumbers;
-      this.size = size;
-      this.loading = false;
-    });
+    this.phonenumberService
+      .getAllNumbers(this.sort)
+      .subscribe((data: Phonenumber) => {
+        const { size, min, max, phonenumbers } = data;
+        this.min = min;
+        this.max = max;
+        this.phonenumbers = phonenumbers;
+        this.size = size;
+        this.loading = false;
+      });
   }
 }

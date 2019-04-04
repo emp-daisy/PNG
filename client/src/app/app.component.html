@@ -9,11 +9,14 @@
         </div>
         <div class="input-group">
           <label>How many numbers required?</label>
-          <input id="min" min="1" max="50" type="number" (change)='setLimit($event.target.value)' value={{limit}} />
+          <input id="limit" min="1" max="50" type="number" (input)='setLimit($event.target.value)' value={{limit}} />
+          <div *ngIf="limit>50" class="error-block">
+            <small class="error">Max number to generate is 50</small>
+          </div>
         </div>
         <div class="input-group">
           <label>Sort by</label>
-          <select value={{sort}} (change)='setSort($event.target.value)'>
+          <select id="sortDropDown" value={{sort}} (change)='setSort($event.target.value)'>
             <option value="asc">Ascending</option>
             <option value="desc">Descending</option>
           </select>
@@ -33,9 +36,9 @@
     </div>
     <div class="resultContainer">
       <div class="record-option">
-        <div class="record-item"><span>Maximum</span>{{max}}</div>
-        <div class="record-item"><span>Minimum</span>{{min}}</div>
-        <div class="record-item"><span>Total</span>{{size}}</div>
+        <div class="record-item"><span>Maximum</span>{{max || "N\A"}}</div>
+        <div class="record-item"><span>Minimum</span>{{min || "N\A"}}</div>
+        <div class="record-item"><span>Total</span>{{size || "N\A"}}</div>
       </div>
       <div class="result-block">
         <div>

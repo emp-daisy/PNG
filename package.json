@@ -17,8 +17,10 @@
     "test:client": "cd client && yarn test:coverage",
     "coverage": "cat coverage/lcov.info | coveralls",
     "coverage:client": "cat client/coverage/lcov.info | coveralls",
-    "lint": "eslint . --ext .js --fix",
+    "lint": "eslint ./server --ext .js --fix",
     "lint:client": "cd client && yarn lint",
+    "merge:coverage": "cp ./client/coverage/client/lcov.info ./coverage/lcov_1.info && cp ./coverage/lcov.info ./coverage/lcov_2.info && lcov-result-merger './coverage/lcov_*.info' './coverage/coverage_merged.log'",
+    "merge:coverall": "coveralls < ./coverage/coverage_merged.log",
     "heroku-postbuild": "yarn run start:client"
   },
   "dependencies": {
@@ -32,6 +34,7 @@
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.16.0",
     "jest": "^24.5.0",
+    "lcov-result-merger": "^3.1.0",
     "nodemon": "^1.18.10",
     "supertest": "^4.0.2"
   },
@@ -44,16 +47,22 @@
       "lcov",
       "text"
     ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/client/"
+    ],
     "coveragePathIgnorePatterns": [
       "/node_modules/",
-      "/coverage/"
+      "/coverage/",
+      "__test__/",
+      "/client/"
     ],
     "collectCoverageFrom": [
       "**/*.js",
       "!server/index.js",
       "!**/node_modules/**",
       "!**/coverage/"
-    ]
+    ],
+    "globalTeardown": "<rootDir>/server/__test__/cleanup.js"
   },
   "nodemonConfig": {
     "watch": [

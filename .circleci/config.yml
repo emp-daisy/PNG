@@ -2,7 +2,9 @@
 defaults: &defaults
   working_directory: ~/png
   docker:
-    - image: circleci/node:11.4.0
+    - image: circleci/node:11.4.0-browsers
+      environment:
+          CHROME_BIN: "/usr/bin/google-chrome"
 jobs:
   build:
     <<: *defaults
@@ -18,23 +20,49 @@ jobs:
           name: Restore Yarn Package Cache
           keys:
             - yarn-packages-{{ checksum "yarn.lock" }}
-      # Cache local dependencies if they don't exist
-      - run:
-          name: Install Dependencies
-          command: yarn install --frozen-lockfile
+            - yarn-packages-{{ checksum "client/yarn.lock" }}
       # Install project dependencies
+      - run:
+          name: Install server Dependencies
+          command: yarn install --frozen-lockfile
+      - run:
+          name: Install client Dependencies
+          command: cd client && yarn install --frozen-lockfile
+      # Cache local dependencies if they don't exist
       - save_cache:
-          name: Save Yarn Package Cache
+          name: Save Server Yarn Package Cache
           key: yarn-packages-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/yarn
+      # Cache local dependencies if they don't exist
+      - save_cache:
+          name: Save Client Yarn Package Cache
+          key: yarn-packages-{{ checksum "client/yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+      # Lint the server source code
+      - run:
+          name: Linting Server
+          command: yarn lint
       # Lint the source code
       - run:
-          name: Linting
-          command: npm run lint
-      # run tests!
-      - run: yarn test
+          name: Linting Client
+          command: yarn lint:client
+      # Run tests server!
+      - run:
+          name: Test Server
+          command: yarn test
+      # Run tests client!
+      - run:
+          name: Test Client
+          command: yarn test:client
       - store_artifacts:
           path: coverage
-      # - run: coverage
-      - run: yarn run coverage
+          destination: coverage-server
+      - store_artifacts:
+          path: client/coverage/client
+          destination: coverage-client
+      # - Run merge coverage and sent to coveralls
+      - run:
+          name: Coverage
+          command: yarn merge:coverage && yarn merge:coverall
