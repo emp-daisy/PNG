@@ -5,7 +5,7 @@ describe('Phone Route', () => {
   describe('/phonenumber/generate', () => {
     it('should generate new numbers', (done) => {
       request(app)
-        .get('/phonenumber/generate')
+        .get('/api/phonenumber/generate')
         .expect(200)
         .end((err, res) => {
           if (err) throw done(err);
@@ -23,7 +23,7 @@ describe('Phone Route', () => {
     });
     it('should generate 50 new numbers', (done) => {
       request(app)
-        .get('/phonenumber/generate/?limit=50&sort=desc')
+        .get('/api/phonenumber/generate/?limit=50&sort=desc')
         .expect(200)
         .end((err, res) => {
           if (err) throw done(err);
@@ -41,7 +41,7 @@ describe('Phone Route', () => {
     });
     it('should generate 50 default numbers when limit of more than 50 is set', (done) => {
       request(app)
-        .get('/phonenumber/generate/?limit=150&sort=desc')
+        .get('/api/phonenumber/generate/?limit=150&sort=desc')
         .expect(200)
         .end((err, res) => {
           if (err) throw done(err);
@@ -62,7 +62,7 @@ describe('Phone Route', () => {
   describe('/phonenumber/', () => {
     it('should return all generated numbers', async (done) => {
       request(app)
-        .get('/phonenumber/')
+        .get('/api/phonenumber/')
         .expect(200)
         .end((err, res) => {
           if (err) throw done(err);

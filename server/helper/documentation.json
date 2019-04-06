@@ -8,7 +8,7 @@
       "name": "Jessica"
     }
   },
-  "basePath": "/",
+  "basePath": "/api/",
   "schemes": ["https", "http"],
   "consumes": [
     "application/json"
