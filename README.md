@@ -11,8 +11,6 @@
 
 * Install [node](https://nodejs.org/en/download/) version 6 or higher
 
-* Install and setup [posgresql](https://www.postgresql.org/download/)
-
 * Clone this repo and navigate to the location
 
         * `$ git clone https://github.com/emp-daisy/PNG.git`
